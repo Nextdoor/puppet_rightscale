@@ -2,7 +2,7 @@ Facter.add(:rightlink_version) do
   confine :kernel => %w{Linux Windows}
   confine :is_rightscale => [true, 'true']
   setcode do
-
+    
     version = nil
     matches = nil
 
