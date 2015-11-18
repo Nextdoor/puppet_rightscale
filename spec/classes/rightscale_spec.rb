@@ -10,6 +10,8 @@ FACTS = {
   :lsbdistrelease => '12.04',
   :lsbmajdistrelease => '12',
   :kernel => 'linux',
+  :rightlink_version => '10.0.0.',
+  :rightlink_maj_version => 10,
 }
 
 describe 'rightscale', :type => 'class' do
