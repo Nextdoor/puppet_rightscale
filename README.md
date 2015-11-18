@@ -192,7 +192,7 @@ recommend having a manual or semi-manual process that installs the config
 file to `/etc/puppet/rightscale.conf`, rather than checking this file into your
 actual code repository.
 
-You must specify a challange password and one or more account sections with
+You must specify a challenge password and one or more account sections with
 RightScale credentials.
 
 You must also specify a custom RightScale `tag` in the global section which we
@@ -208,7 +208,7 @@ Here's an example configuration file that has two RightScale account
 identifiers, 1234 and 5678:
 
     [global]
-    challange_password = '...'
+    challenge_password = '...'
     tag = 'namespace:predicate'
     debug = /path/to/debug.log
      
