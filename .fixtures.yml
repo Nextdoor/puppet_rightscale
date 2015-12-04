@@ -1,8 +1,10 @@
 fixtures:
   repositories:
-    "apt": "https://github.com/puppetlabs/puppetlabs-apt"
+    "apt":
+      "repo": "git://github.com/puppetlabs/puppetlabs-apt.git"
+      "ref": "1.3.0"
     "stdlib":
       "repo": "git://github.com/puppetlabs/puppetlabs-stdlib.git"
-      "ref": "v2.2.1"
+      "ref": "4.4.0"
   symlinks:
     "rightscale": "#{source_dir}"
