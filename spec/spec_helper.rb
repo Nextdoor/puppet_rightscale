@@ -18,3 +18,10 @@ require 'puppetlabs_spec_helper/module_spec_helper'
 #SimpleCov.at_exit do
 #  SimpleCov.result.format!
 #end
+
+# need this for allow()
+RSpec.configure do |config|
+  config.mock_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+end
