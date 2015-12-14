@@ -29,17 +29,9 @@ class rightscale (
   unless is_integer($::rightlink_maj_version) {
     fail("\$::rightlink_maj_version is \'${::rightlink_maj_version}\' but must be Integer!")
   }
-
-  notify { "hello?": }
   
   case $::rightlink_maj_version {
-    10: {
-      include ::sudo
-      #sudoers::add { 'includedir for RightLink10':
-      #  data  => "\n# RL10 drops a file in sudoers.d\n#includedir /etc/sudoers.d",
-      #  order => '99',
-      #}
-    }
+    10: { include ::sudo }
     
     6: {
       # Install the required gems in order. These gems support the custom
