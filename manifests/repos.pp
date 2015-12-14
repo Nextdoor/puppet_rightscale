@@ -39,7 +39,7 @@
 #
 # === Examples
 #
-#   class { 'rightscale::repos':
+#   class { '::rightscale::repos':
 #     force => false,
 #     date  => '2014/03/13';
 #   }
@@ -55,11 +55,11 @@ class rightscale::repos (
   $fallback_mirror = 'cf-mirror.rightscale.com',
 ) {
   # Include the puppetlabs apt module so we can notify it of updates.
-  include apt::update
+  include ::apt::update
 
   # Include the apt::params package so we can find out where we should put
   # our source lists if they're missing.
-  include apt::params
+  include ::apt::params
   $sources_list_d = $apt::params::sources_list_d
 
   # If $force is true, then we adjust the behavior of a few file resources.

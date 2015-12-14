@@ -25,3 +25,8 @@ RSpec.configure do |config|
     c.syntax = [:should, :expect]
   end
 end
+
+if ENV['RSPEC_PUPPET_DEBUG']
+  Puppet::Util::Log.level = :debug
+  Puppet::Util::Log.newdestination(:console)
+end

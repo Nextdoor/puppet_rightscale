@@ -29,19 +29,25 @@ class rightscale (
   unless is_integer($::rightlink_maj_version) {
     fail("\$::rightlink_maj_version is \'${::rightlink_maj_version}\' but must be Integer!")
   }
+
+  notify { "hello?": }
   
   case $::rightlink_maj_version {
     10: {
-      sudoers::add { 'includedir for RightLink10':
-        data  => "\n# RL10 drops a file in sudoers.d\n#includedir /etc/sudoers.d",
-        order => '99',
-      }
+      include ::sudo
+      #sudoers::add { 'includedir for RightLink10':
+      #  data  => "\n# RL10 drops a file in sudoers.d\n#includedir /etc/sudoers.d",
+      #  order => '99',
+      #}
     }
     
     6: {
       # Install the required gems in order. These gems support the custom
       # Hiera backend as well as the puppet rs-facts plugin that gathers
       # common RightScale facts.
+
+      require ::rightscale::repos
+      
       package {
         'rest-client':
           ensure   => $rest_client,

@@ -10,6 +10,7 @@ describe provider_class do
       :provider => described_class.name }
   )}
   let(:provider) { resource.provider }
+  let(:facts) { { :is_rightscale => true, :rightlink_version => '6.0.0', :rightlink_maj_version => 6 } }
 
   before :each do
     # Mocked list of existing tags to run our tests against
@@ -35,7 +36,7 @@ describe provider_class do
 
   describe 'exists?' do
     it 'checks if `test` tag exists (should not)' do
-       provider.exists?.should be_false
+       provider.exists?.should be_falsey
     end
   end
 
