@@ -2,6 +2,7 @@ require 'rubygems'
 #require 'simplecov'
 #require 'simplecov-csv'
 require 'puppetlabs_spec_helper/module_spec_helper'
+require 'puppet-lint'
 
 # Configure the coverage reporter
 #SimpleCov.start do

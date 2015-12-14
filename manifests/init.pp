@@ -38,8 +38,6 @@ class rightscale (
       # Hiera backend as well as the puppet rs-facts plugin that gathers
       # common RightScale facts.
 
-      require ::rightscale::repos
-      
       package {
         'rest-client':
           ensure   => $rest_client,

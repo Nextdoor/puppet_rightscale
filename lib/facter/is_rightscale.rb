@@ -7,14 +7,14 @@ Facter.add(:is_rightscale) do
     rs_config = Facter::Util::Resolution.exec('rs_config --version')
     rsc = Facter::Util::Resolution.exec('rsc --version')
     
-    Facter.debug("rsconfig --version :: %s" % rs_config)
-    Facter.debug("rsc --version :: %s" % rsc)
+    Facter.debug("is_rightscale :: rsconfig --version :: %s" % rs_config)
+    Facter.debug("is_rightscale :: rsc --version :: %s" % rsc)
 
     if rsc or rs_config
       ret = true
     end
     
-    Facter.debug("ret: %s" % ret)
+    Facter.debug("is_rightscale :: ret: %s" % ret)
     ret
   end
 end

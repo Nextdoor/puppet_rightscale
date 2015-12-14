@@ -26,7 +26,6 @@ describe '::rightscale', :type => 'class' do
         }
       )
       
-      puts "Facts: %s" % facts.to_s
       should compile.with_all_deps
       should contain_package('rest-client').with(
         'ensure' => '1.6.7')

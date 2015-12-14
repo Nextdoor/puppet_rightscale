@@ -3,7 +3,13 @@ guard 'remote-sync',
       :source => 'lib/facter',
       :destination => "/tmp",
       :user => 'root',
-      :remote_address => ENV['RIGHTLINK10_NODE'] do
+      :recursive => true,
+      :verbose => true,
+      :progress => true,
+      :sync_on_start => true,
+      :dry_run => false,
+      :timeout => 10,
+      :remote_address => ENV['RIGHTSCALE_NODE'] do
 
   watch(%r{^.+\.(pp|rb)$})
   

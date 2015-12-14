@@ -3,7 +3,7 @@ Facter.add(:rightlink_maj_version) do
   setcode do
 
     rightlink_version = Facter.value(:rightlink_version)
-    Facter.debug("rightlink_version: %s" % (rightlink_version))
+    Facter.debug("rightlink_maj_version :: rightlink_version: %s" % (rightlink_version))
     
     majversion = nil
 

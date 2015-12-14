@@ -2,3 +2,7 @@
 .#*
 \#.*
 *.lock
+spec/fixtures/modules
+.travis.yml.swp
+.rsync-filter
+spec/fixtures/manifests
