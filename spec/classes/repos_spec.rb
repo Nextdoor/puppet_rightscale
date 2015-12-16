@@ -10,6 +10,9 @@ FACTS = {
   :lsbdistrelease => '12.04',
   :lsbmajdistrelease => '12',
   :kernel => 'linux',
+  :is_rightscale => true,
+  :rightlink_version => '6.0.0',
+  :rightlink_maj_version => 6
 }
 
 describe 'rightscale::repos', :type => 'class' do

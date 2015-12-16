@@ -2,6 +2,7 @@ require 'rubygems'
 #require 'simplecov'
 #require 'simplecov-csv'
 require 'puppetlabs_spec_helper/module_spec_helper'
+require 'puppet-lint'
 
 # Configure the coverage reporter
 #SimpleCov.start do
@@ -18,3 +19,15 @@ require 'puppetlabs_spec_helper/module_spec_helper'
 #SimpleCov.at_exit do
 #  SimpleCov.result.format!
 #end
+
+# need this for allow()
+RSpec.configure do |config|
+  config.mock_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+end
+
+if ENV['RSPEC_PUPPET_DEBUG']
+  Puppet::Util::Log.level = :debug
+  Puppet::Util::Log.newdestination(:console)
+end
