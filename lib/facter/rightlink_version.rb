@@ -1,3 +1,19 @@
+# Fact: rightlink_version
+#
+# Scrape the output of the rightlink or rs_config utils to get
+# the installed version of RightLink.
+#
+# Known to work with RL6 and RL10.
+#
+# Values: String representing version or nil
+#
+# Author: Nathan Valentine - <nathan@nextdoor.com|nrvale0@gmail.com>
+#
+# Notes
+#   - regexs for Ruby > 1.8.7 left in comments anticipating eventual
+#     deprecation for anything older than 1.9.3. Ruby 1.8.7 to 1.9.3
+#     aka The Great Regex Migration. ;)
+#
 Facter.add(:rightlink_version) do
   confine :kernel => %w{Linux Windows}
   confine :is_rightscale => [true, 'true']

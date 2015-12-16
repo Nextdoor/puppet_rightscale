@@ -1,3 +1,13 @@
+# Fact: rightlink_maj_version
+#
+# Split rightlink_version to extract the major version.
+#
+# Values: Integer or nil.
+#
+# Notes: Requires Fact rightlink_version.
+#
+# Author: Nathan Valentine - <nathan@nextdoor.com|nrvale0@gmail.com>
+#
 Facter.add(:rightlink_maj_version) do
   confine :kernel => %w{Linux Windows}
   setcode do
