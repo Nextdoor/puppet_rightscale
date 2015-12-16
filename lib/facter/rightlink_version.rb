@@ -27,7 +27,7 @@ Facter.add(:rightlink_version) do
     regex = "^\w+ \d+\.\d+\.\d+.*$"
     out = Facter::Util::Resolution.exec('rightlink --version')
     Facter.debug("rightlink_version :: Match status for RightLink 10: %s" % (out.to_s))
-    unless nil != out
+    if nil == out
       # check for RightLink < 10
       # regex = %r{^rs_config (?<version>\d\.\d+\.\d+).*$}
       regex = "^rs_config \d+\.\d+\.\d+.*$"
