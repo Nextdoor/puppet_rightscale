@@ -32,7 +32,7 @@ describe RightScale do
     # Mock the RightApi::Client to respond with a mocked object
     @mocked_api_client = double("RightApi::Client")
     stub_const("RightApi::Client",  @mocked_api_client)
-    @mocked_api_client.stub(:new).and_return { random_client }
+    allow(@mocked_api_client).to receive(:new).and_return(random_client)
 
     # Mock the RestClient::Resource to always respond with a mocked object
     @mocked_rest_client = double("RestClient")
@@ -52,7 +52,7 @@ describe RightScale do
   end
 
   it "#new" do
-    @rs.should be_an_instance_of RightScale
+    expect(@rs).to be_an_instance_of RightScale
   end
 
   ######################
@@ -61,7 +61,7 @@ describe RightScale do
   it "get_config() should be idempotent" do
     first_config = @rs.get_config()
     second_config = @rs.get_config()
-    first_config.should be second_config
+    expect(first_config).to be second_config
   end
 
   it "get_config() should fail if no configs found" do
@@ -89,9 +89,9 @@ describe RightScale do
 
   it "get_config() with valid config file should return config" do
     stub_const("RightScale::POTENTIAL_CONFIGS",
-      [File.join(File.dirname(__FILE__), '..', 'fixtures', 'valid_config')])
-    @rs.get_config()['account1']['email'].should == 'email'
-    @rs.get_config()['account2']['oath2_token'].should == '1234'
+               [File.join(File.dirname(__FILE__), '..', 'fixtures', 'valid_config')])
+    expect(@rs.get_config()['account1']['email']).to eq('email')
+    expect(@rs.get_config()['account2']['oath2_token']).to eq('1234')
   end
 
   #########################
@@ -112,7 +112,7 @@ describe RightScale do
     @mocked_rest_client.should_receive(:post).once
     first_clients = @rs.get_clients()
     second_clients = @rs.get_clients()
-    first_clients.should be second_clients
+    expect(first_clients).to be second_clients
   end
 
   it "get_clients() should refresh after 1 hour" do
@@ -125,7 +125,7 @@ describe RightScale do
     Time.stub(:now).and_return(10000)  # Drastically higher than 3600
     second_clients = @rs.get_clients()
 
-    first_clients.should_not be second_clients
+    expect(first_clients).to_not be second_clients
   end
 
   ############################
@@ -151,7 +151,7 @@ describe RightScale do
     token = @rs.get_access_token(:refresh_token => 'abc')
 
     # Should get back abcdef as our actual api token
-    token.should == 'abcdef'
+    expect(token).to eq('abcdef')
   end
 
   it "get_access_token() should raise exception if error code" do
@@ -214,20 +214,20 @@ describe RightScale do
 
     # Now execute the search
     t = @rs.get_tags_by_tag('unittest')
-    t.should == [ 'fake_tag1' , 'fake_tag2' ]
+    expect(t).to eq([ 'fake_tag1' , 'fake_tag2' ])
 
     # Now execute the search, but turn deduping off
     t = @rs.get_tags_by_tag('unittest', false)
-    t.should == ['fake_tag1', 'fake_tag1', 'fake_tag2', 'fake_tag2']
+    expect(t).to eq(['fake_tag1', 'fake_tag1', 'fake_tag2', 'fake_tag2'])
   end
 
   ###################################
   # split_tag_for_searching() tests #
   ###################################
   it "split_tag_for_searching() should work" do
-    @rs.split_tag_for_searching('nd').should == ['nd', nil, nil]
-    @rs.split_tag_for_searching('nd:auth').should == ['nd', 'auth', nil]
-    @rs.split_tag_for_searching('nd:auth=foo').should == ['nd', 'auth', 'foo']
-    @rs.split_tag_for_searching('nd:auth=foo=bar').should == ['nd', 'auth', 'foo=bar']
+    expect(@rs.split_tag_for_searching('nd')).to eq(['nd', nil, nil])
+    expect(@rs.split_tag_for_searching('nd:auth')).to eq(['nd', 'auth', nil])
+    expect(@rs.split_tag_for_searching('nd:auth=foo')).to eq(['nd', 'auth', 'foo'])
+    expect(@rs.split_tag_for_searching('nd:auth=foo=bar')).to eq(['nd', 'auth', 'foo=bar'])
   end
 end
