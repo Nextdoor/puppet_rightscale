@@ -21,6 +21,8 @@ class rightscale (
   $right_api_client = $rightscale::params::right_api_client,
   $right_aws        = $rightscale::params::right_aws,
   $rest_client      = $rightscale::params::rest_client,
+  $rest_package     = $rightscale::params::rest_package,
+  $rest_provider    = $rightscale::params::rest_provider,
   ) inherits ::rightscale::params {
 
   # pretty sure our version of stdlib does not include validate_integer
@@ -39,19 +41,20 @@ class rightscale (
       # common RightScale facts.
 
       package {
-        'rest-client':
+        $rest_package:
           ensure   => $rest_client,
-          provider => 'gem';
+          provider => $rest_provider;
         
         'right_aws':
           ensure   => $right_aws,
           provider => 'gem',
-          require  => Package['rest-client'];
+          require  => Package[$rest_package];
         
         'right_api_client':
-          ensure   => $right_api_client,
-          provider => 'gem',
-          require  => Package['rest-client'];
+          ensure          => $right_api_client,
+          provider        => 'gem',
+          install_options => '--ignore-dependencies',
+          require         => Package[$rest_package];
       }
     }
     
