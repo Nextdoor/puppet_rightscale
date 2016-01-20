@@ -23,12 +23,12 @@ class rightscale::params {
     'Ubuntu': {
       $rest_provider = 'apt'
       $rest_package  = 'ruby-rest-client'
-      $rest_client   = 'installed'
+      $rest_client   = '1.6.7-1'
     }
     default: {
       $rest_provider = 'gem'
       $rest_package  = 'rest-client'
-      $rest_client   = '1.6.7'
+      $rest_client   = '1.6.7-1'
     }
   }
 }
