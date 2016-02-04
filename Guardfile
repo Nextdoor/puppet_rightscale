@@ -1,8 +1,9 @@
 guard 'remote-sync',
       :ssh => true,
-      :source => 'lib/facter',
-      :destination => "/tmp",
+      :source => 'lib/',
+      :destination => '/var/lib/puppet/lib',
       :user => 'root',
+      :delete => false,
       :recursive => true,
       :verbose => true,
       :progress => true,
@@ -11,6 +12,6 @@ guard 'remote-sync',
       :timeout => 10,
       :remote_address => ENV['RIGHTSCALE_NODE'] do
 
-  watch(%r{^.+\.(pp|rb)$})
+  watch(%r{^.+$})
   
 end

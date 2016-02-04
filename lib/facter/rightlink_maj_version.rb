@@ -10,6 +10,8 @@
 #
 Facter.add(:rightlink_maj_version) do
   confine :kernel => %w{Linux Windows}
+  confine :rightlink_version
+
   setcode do
 
     rightlink_version = Facter.value(:rightlink_version)

@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-if '1.8.7' == RUBY_VERSION
+if '1.8.7' == RUBY_VERSION or '1.9.3' == RUBY_VERSION or '2.0.0' == RUBY_VERSION
   rspec_core_version = '3.1.7'
   listen_version = '1.3.1'
   rest_client_version = '1.6.8'
