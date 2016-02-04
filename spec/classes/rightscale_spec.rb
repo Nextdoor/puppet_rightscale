@@ -4,15 +4,15 @@ describe '::rightscale', :type => 'class' do
 
   let! :facts do
     {
-      :osfamily               => 'Debian',
-      :operatingsystem        => 'Ubuntu',
-      :operatingsystemrelease => '12',
-      :lsbdistid              => 'Ubuntu',
-      :lsbdistcodename        => 'precise',
-      :lsbdistrelease         => '12.04',
-      :lsbmajdistrelease      => '12',
-      :kernel                 => 'linux',
-      :is_rightscale          => true,
+      :osfamily                  => 'Debian',
+      :operatingsystem           => 'Ubuntu',
+      :operatingsystemmajrelease => '12.04',
+      :lsbdistid                 => 'Ubuntu',
+      :lsbdistcodename           => 'precise',
+      :lsbdistrelease            => '12.04',
+      :lsbmajdistrelease         => '12',
+      :kernel                    => 'linux',
+      :is_rightscale             => true,
     }
   end
 
@@ -30,7 +30,7 @@ describe '::rightscale', :type => 'class' do
       should contain_package('right_aws').with(
                'ensure' => '3.1.0')
       should contain_package('right_api_client').with(
-               'ensure' => '1.5.19')
+               'ensure' => '1.5.26')
 
       should contain_class('sudo')
       should contain_sudo__conf('rightscale_users').with(
@@ -102,7 +102,7 @@ describe '::rightscale', :type => 'class' do
       should contain_package('right_aws').with(
         'ensure' => '3.1.0')
       should contain_package('right_api_client').with(
-        'ensure' => '1.5.19')
+        'ensure' => 'installed')
     end
   end
 
