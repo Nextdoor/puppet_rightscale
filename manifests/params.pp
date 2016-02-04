@@ -26,7 +26,7 @@ class rightscale::params {
     
   } else {
     $rest_provider = 'gem'
-    $rest_package = 'rest-client'  
+    $rest_package = 'rest-client'
     $right_api_client = 'installed'
   }
   
