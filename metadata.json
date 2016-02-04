@@ -1,6 +1,6 @@
 {
     "name": "rightscale",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "source": "https://github.com/Nextdoor/puppet_rightscale",
     "author": "Nextdoor",
     "license": "Apache-2.0",
