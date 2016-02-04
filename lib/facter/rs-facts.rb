@@ -70,6 +70,7 @@ end
 def get_client()
   # If the RightScale API has not been loaded, return nil.
   if not defined?(RightApi)
+    Facter.debug("rs-facts: RightAPI not defined. Module not loaded?")
     return
   end
 
@@ -83,6 +84,9 @@ def get_client()
       $client = RightApi::Client.new(:instance_token => creds[1],
                                      :account_id => creds[0])
     rescue Exception => e
+      Facter.debug("rs-facts: Failed creating RightAPI client!\n%s\n%s" % \
+                   [e.message, e.backtrace])
+                   
       return
     end
   end
