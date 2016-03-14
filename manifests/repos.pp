@@ -85,8 +85,8 @@ class rightscale::repos (
   }
 
   # Install the RightScale GPG Signing Key
-  apt::key { '9A917D05':
-    key_source => "http://${fallback_mirror}/mirrorkeyring/rightscale_key.pub",
+  apt::key { '6DCD2E1B55C68049DE9BFED362F960209A917D05':
+    source => "http://${fallback_mirror}/mirrorkeyring/rightscale_key.pub",
   }
 
   # Set up the Ubuntu mirror apt configuration files. Rather than leveraging
@@ -125,18 +125,18 @@ class rightscale::repos (
     # mirror. If not, skip it and rely on the fallback mirror.
     if $mirror {
       apt::source { 'rightscale_security_mirror':
-        location    => "http://${mirror}/ubuntu_daily/${enable_security}",
-        include_src => false,
-        release     => "${::lsbdistcodename}-security",
-        repos       => 'main restricted universe multiverse';
+        location => "http://${mirror}/ubuntu_daily/${enable_security}",
+        include  => { 'src' => false },
+        release  => "${::lsbdistcodename}-security",
+        repos    => 'main restricted universe multiverse';
       }
     }
     $loc = "http://${fallback_mirror}/ubuntu_daily/${enable_security}"
     apt::source { 'rightscale_security_fallback':
-      location    => $loc,
-      include_src => false,
-      release     => "${::lsbdistcodename}-security",
-      repos       => 'main restricted universe multiverse';
+      location => $loc,
+      include  => { 'src' => false },
+      release  => "${::lsbdistcodename}-security",
+      repos    => 'main restricted universe multiverse';
     }
   }
 }
