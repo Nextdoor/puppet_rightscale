@@ -22,8 +22,8 @@ describe 'rightscale::repos', :type => 'class' do
     it { should contain_class('Apt::Update') }
     it { should contain_class('Apt::Params') }
 
-    it { should contain_apt__key('9A917D05').with(
-      'key_source' => 'http://cf-mirror.rightscale.com/mirrorkeyring/rightscale_key.pub') }
+    it { should contain_apt__key('6DCD2E1B55C68049DE9BFED362F960209A917D05').with(
+      'source' => 'http://cf-mirror.rightscale.com/mirrorkeyring/rightscale_key.pub') }
 
     it { should contain_file('/etc/apt/sources.list.d/rightscale.sources.list').with(
       'ensure'  => 'file',
@@ -62,8 +62,8 @@ describe 'rightscale::repos', :type => 'class' do
     let(:params) { { 'fallback_mirror' => 'unittest.com' } }
 
     it { should compile.with_all_deps }
-    it { should contain_apt__key('9A917D05').with(
-      'key_source' => 'http://unittest.com/mirrorkeyring/rightscale_key.pub') }
+    it { should contain_apt__key('6DCD2E1B55C68049DE9BFED362F960209A917D05').with(
+      'source' => 'http://unittest.com/mirrorkeyring/rightscale_key.pub') }
     it { should contain_file('/etc/apt/sources.list.d/rightscale.sources.list').with(
       'content' => /http:\/\/unittest.com/) }
     it { should contain_file('/etc/apt/sources.list.d/rightscale_extra.sources.list').with(
