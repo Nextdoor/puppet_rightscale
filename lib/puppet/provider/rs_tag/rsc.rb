@@ -22,7 +22,7 @@
 require 'rubygems'
 require 'json'
 
-require_relative '../../../puppet_x/rightscale/utils.rb'
+require "#{File.join(File.dirname(__FILE__), '..', '..', '..', 'puppet_x', 'rightscale', 'utils')}"
 
 Puppet::Type.type(:rs_tag).provide(:rsc) do
   desc "Manage RightScale tags for a server"

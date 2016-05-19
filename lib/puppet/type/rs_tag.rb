@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative '../../puppet_x/rightscale/tag.rb'
+require "#{File.join(File.dirname(__FILE__), '..', '..', 'puppet_x', 'rightscale', 'tag')}"
 
 Puppet::Type.newtype(:rs_tag) do
   extend PuppetX::RightScale::Tag

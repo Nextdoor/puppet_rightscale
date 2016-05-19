@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-require_relative '../../../../lib/puppet/type/rs_tag.rb'
-require_relative '../../../../lib/puppet/provider/rs_tag/rsc.rb'
+require "#{File.join(File.dirname(__FILE__), '..', '..', '..', '..', 'lib', 'puppet', 'type', 'rs_tag')}"
+require "#{File.join(File.dirname(__FILE__), '..', '..', '..', '..', 'lib', 'puppet', 'provider', 'rs_tag', 'rsc')}"
 
 provider_class = Puppet::Type.type(:rs_tag).provider(:rsc)
 

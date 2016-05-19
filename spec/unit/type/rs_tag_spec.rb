@@ -1,5 +1,5 @@
 require 'spec_helper'
-require "#{File.join(File.dirname(__FILE__),'..','..','..','lib','puppet','type','rs_tag')}"
+require "#{File.join(File.dirname(__FILE__), '..', '..', '..', 'lib', 'puppet', 'type', 'rs_tag')}"
 
 #supported_rightlink_versions = %w(6 10)
 supported_rightlink_versions = %w(10)

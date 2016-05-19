@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative './utils.rb'
+require "#{File.join(File.dirname(__FILE__), 'utils')}"
 
 module PuppetX
   module RightScale
@@ -45,12 +45,19 @@ module PuppetX
         validate do
           Puppet.debug("Validating the entire Rs_tag Type....")
 
+          if nil == self.provider
+            Puppet.debug("Rs_type#validate:: self.provider does not exist...we are almost " +
+                         "certainly running in rspec-puppet unit test mode and no Mock exist for " +
+                         "Provider...")
+            Puppet.debug("Rs_type#validate:: skipping validate() since we are in unit test mode.")
+            return true
+          end
+
           # It's quite tricky to check that 'value =>' exists for Machine Tags
           # in the various scenarios involving both resource queries and enforcements
           # but I believe this covers *most* of the bases.
 
           Puppet.debug("self:: #{self.to_hash}")
-#          Puppet.debug("self.provider.value:: #{self.provider.value}")
           
           tag_type = PuppetX::RightScale::Utils.validate_tag({:name => self[:name]})
 
