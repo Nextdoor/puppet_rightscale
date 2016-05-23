@@ -18,7 +18,7 @@ describe Facter::Util::Fact do
       Facter.clear
       Facter.clear_messages
     end
-    
+
     context "Fact 'rightlink_version' does not exist" do
       it "should return value nil" do
         allow(Facter.fact(:rightlink_version)).to receive(:value).and_return(nil)

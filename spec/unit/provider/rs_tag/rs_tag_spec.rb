@@ -1,14 +1,13 @@
 require 'spec_helper'
-require "#{File.join(File.dirname(__FILE__),'..','..','..','..','lib','puppet','type','rs_tag')}"
-require "#{File.join(File.dirname(__FILE__),'..','..','..','..','lib','puppet','provider','rs_tag','ruby')}"
 
-provider_class = Puppet::Type.type(:rs_tag).provider(:ruby)
+require "#{File.join(File.dirname(__FILE__), '..', '..', '..', '..', 'lib', 'puppet', 'type', 'rs_tag')}"
+require "#{File.join(File.dirname(__FILE__), '..', '..', '..', '..', 'lib', 'puppet', 'provider', 'rs_tag', 'rsc')}"
+
+provider_class = Puppet::Type.type(:rs_tag).provider(:rs_tag)
 
 describe provider_class do
-  let(:resource) { Puppet::Type.type(:rs_tag).new(
-    { :name     => 'test',
-      :provider => described_class.name }
-  )}
+  let(:resource) {
+    Puppet::Type.type(:rs_tag).new( { :name => 'test', :provider => described_class.name } )}
   let(:provider) { resource.provider }
   let(:facts) { { :is_rightscale => true, :rightlink_version => '6.0.0', :rightlink_maj_version => 6 } }
 

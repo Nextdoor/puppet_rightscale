@@ -6,3 +6,4 @@ spec/fixtures/modules
 *.swp
 .rsync-filter
 spec/fixtures/manifests
+\#*

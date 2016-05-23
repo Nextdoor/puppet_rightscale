@@ -36,7 +36,7 @@ describe AutoSigner do
 
   it "#new" do
     # Lastly create our AutoSigner object
-    @auto.should be_an_instance_of AutoSigner
+    expect(@auto).to be_an_instance_of AutoSigner
   end
 
   it "#new with debug enabled" do

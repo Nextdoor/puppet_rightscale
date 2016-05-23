@@ -35,8 +35,12 @@
 require 'rubygems'
 require 'json'
 
-Puppet::Type.type(:rs_tag).provide(:ruby) do
+Puppet::Type.type(:rs_tag).provide(:rs_tag) do
   desc "Manage RightScale tags for a server"
+
+  confine :is_rightscale => true, :rightlink_maj_version => 6
+  defaultfor :rightlink_maj_version => 6
+  
   commands :rs_tag => 'rs_tag'
 
   mk_resource_methods
@@ -79,7 +83,7 @@ Puppet::Type.type(:rs_tag).provide(:ruby) do
       # Now populate some instance properties about the state of this tag
       properties[:ensure]   = :present
       properties[:value]    = v.join('=')
-      properties[:provider] = :ruby
+      properties[:provider] = :rs_tag
       properties[:name]     = n
 
       # Log out out and then generate a new instance with the properties
