@@ -3,7 +3,7 @@
 # ideal as leaving the original in place. Please check your boot scripts.
 
 <% if @mirror %>
-deb http://<%= @mirror %>/rightscale_software_ubuntu/<%= @date %>/ precise main
+deb http://<%= @mirror %>/rightscale_software_ubuntu/<%= @date %>/ <%= @lsbdistcodename %> main
 <% end -%>
 
-deb http://<%= @fallback_mirror %>/rightscale_software_ubuntu/<%= @date %>/ precise main
+deb http://<%= @fallback_mirror %>/rightscale_software_ubuntu/<%= @date %>/ <%= @lsbdistcodename %> main

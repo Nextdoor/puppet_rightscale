@@ -3,11 +3,11 @@
 # ideal as leaving the original in place. Please check your boot scripts.
 
 <% if @mirror %>
-deb http://<%= @mirror %>/ubuntu_daily/<%= @date %>/ precise main restricted multiverse universe
-deb http://<%= @mirror %>/ubuntu_daily/<%= @date %>/ precise-updates main restricted multiverse universe
-deb http://<%= @mirror %>/ubuntu_daily/<%= @date %>/ precise-security main restricted multiverse universe
+deb http://<%= @mirror %>/ubuntu_daily/<%= @date %>/ <%= @lsbdistcodename %> main restricted multiverse universe
+deb http://<%= @mirror %>/ubuntu_daily/<%= @date %>/ <%= @lsbdistcodename %>-updates main restricted multiverse universe
+deb http://<%= @mirror %>/ubuntu_daily/<%= @date %>/ <%= @lsbdistcodename %>-security main restricted multiverse universe
 <% end -%>
 
-deb http://<%= @fallback_mirror %>/ubuntu_daily/<%= @date %>/ precise main restricted multiverse universe
-deb http://<%= @fallback_mirror %>/ubuntu_daily/<%= @date %>/ precise-updates main restricted multiverse universe
-deb http://<%= @fallback_mirror %>/ubuntu_daily/<%= @date %>/ precise-security main restricted multiverse universe
+deb http://<%= @fallback_mirror %>/ubuntu_daily/<%= @date %>/ <%= @lsbdistcodename %> main restricted multiverse universe
+deb http://<%= @fallback_mirror %>/ubuntu_daily/<%= @date %>/ <%= @lsbdistcodename %>-updates main restricted multiverse universe
+deb http://<%= @fallback_mirror %>/ubuntu_daily/<%= @date %>/ <%= @lsbdistcodename %>-security main restricted multiverse universe
