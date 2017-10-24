@@ -75,13 +75,10 @@ class rightscale::repos (
   # If the server has the rs_island fact defined, we use that as our mirror
   # location primarily in the event that we're creating the repo configuration
   # files from scratch. If not, we use the fallback_mirror above.
-  case $::rs_island {
-    undef: {
-      $mirror = undef
-    }
-    default: {
-      $mirror = $::rs_island
-    }
+  if defined('$::rs_island') {
+    $mirror = $::rs_island
+  } else {
+    $mirror = undef
   }
 
   # Install the RightScale GPG Signing Key
