@@ -23,12 +23,12 @@ class rightscale::params {
     if '12.04' == $::operatingsystemmajrelease {
       $right_api_client = '1.5.26'
     }
-    
+
   } else {
     $rest_provider = 'gem'
     $rest_package = 'rest-client'
     $right_api_client = 'installed'
   }
-  
+
   $right_aws        = '3.1.0'
 }
