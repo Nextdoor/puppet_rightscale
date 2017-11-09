@@ -16,6 +16,8 @@ FACTS = {
 }
 
 describe 'rightscale::repos', :type => 'class' do
+  let(:pre_condition) { 'class { "apt": }' }
+
   context 'default params' do
     let(:facts) { FACTS }
     it { should compile }
