@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe '::rightscale', :type => 'class' do
 
+  let(:pre_condition) { 'class { "apt": }' }
+
   let! :facts do
     {
       :osfamily                  => 'Debian',

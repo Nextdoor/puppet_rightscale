@@ -6,19 +6,21 @@ if '1.8.7' == RUBY_VERSION or '1.9.3' == RUBY_VERSION or '2.0.0' == RUBY_VERSION
   rest_client_version = '1.6.8'
   logging_version = '1.8.2'
   rake_version = '10.5.0'
+  puppetlabs_spec_helper_version = '1.2.2'
 else
   rspec_core_version = '>= 3.4.1'
   listen_version = '>= 3.0.5'
   rest_client_version = '>= 1.8.0'
   logging_version = '>= 2.0.0'
   rake_version = '>= 11.1.2'
+  puppetlabs_spec_helper = '> 2.0.0'
 end
 
 # Required for unit testing
 gem 'facter', :require => false, :group => :test
 gem 'puppet', '3.7.4', :require => false, :group => :test
 gem 'puppet-lint', :require => false, :group => :test
-gem 'puppetlabs_spec_helper', :require => false, :group => :test
+gem 'puppetlabs_spec_helper', puppetlabs_spec_helper_version, :require => false, :group => :test
 gem 'rake', rake_version, :require => false, :group => :test
 gem 'rest-client', rest_client_version, :require => false, :group => :test
 gem 'listen', listen_version, :require => false, :group => :test

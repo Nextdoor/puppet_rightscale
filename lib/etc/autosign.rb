@@ -39,7 +39,8 @@ Logging.logger.root.appenders = Logging.appenders.stdout
 Logging.logger.root.level = :debug
 @log = Logging.logger[self]
 
-PP_PRESHARED_KEY_VALUE='1.3.6.1.4.1.34380.1.1.4'
+PP_PRESHARED_KEY_OID='1.3.6.1.4.1.34380.1.1.4'
+CHALLENGE_PASSPHRASE_OID='1.2.840.113549.1.9.7'
 
 class AutoSigner
   # Initialize the AutoSigner object by sanity checking the config, creating
@@ -78,20 +79,29 @@ class AutoSigner
   # * *Returns* :
   #   - The value of the attribute matching the pp_preshared_key name.
   #
-  def find_preshared_key(attributes)
-    # Loop through the attributes looking for our extension
-    begin
-      attributes.value.value.first.value.each do |extension|
-        key = extension.value[0].value
-        val = extension.value[1].value
+  def find_attribute(key, attributes)
+    @log.info("Searching for #{key}")
 
-        if key == PP_PRESHARED_KEY_VALUE || key == 'pp_preshared_key'
-          return val
+    # First, look for the attribute directly
+    attr = attributes.find{|x| x.oid == key}
+    if attr
+      return attr.value.first.value
+    end
+
+    # Next, look for the 'extReq' oid and deep search it
+    extreq = attributes.find{|x| x.oid == 'extReq'}
+    if extreq
+      extreq.value.first.value.each do |req|
+        k = req.value[0].value
+        v = req.value[1].value
+
+        if k == key
+          return v
         end
       end
-    rescue Exception => e
-      raise("Invalid CSR: #{e}")
     end
+
+    return nil
   end
 
   # Validates an incoming CSR and ensures that it has both the
@@ -112,14 +122,17 @@ class AutoSigner
     csr = OpenSSL::X509::Request.new raw_csr
     @log.debug("CSR: #{csr}")
 
-    # Basic CSR sanity check
-    if csr.attributes.length != 2
-      raise('The CSR is missing attributes')
-    end
-
     # Extract attributes from the CSR
-    challenge_password = csr.attributes[0].value.value.first.value
-    pp_preshared_key = find_preshared_key(csr.attributes[1])
+    challenge_password =
+      find_attribute(CHALLENGE_PASSPHRASE_OID, csr.attributes) ||
+      find_attribute('challengePassword', csr.attributes)
+
+    # See if there is a pp_preshared_key in the reqExt attribute.. Don't ask me
+    # why here the OID doesn't work, but seraching for the term
+    # 'pp_preshared_key' does. This is some ruby black magic I don't
+    # understand.
+    pp_preshared_key = find_attribute('pp_preshared_key', csr.attributes)
+
     @log.debug("CSR Supplied challenge_password: #{challenge_password}")
     @log.debug("CSR Supplied pp_preshared_key: #{pp_preshared_key}")
 

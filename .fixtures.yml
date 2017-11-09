@@ -5,9 +5,9 @@ fixtures:
       "ref": "2.2.1"
     "sudo":
       "repo": "https://github.com/saz/puppet-sudo.git"
-      "ref": "v3.0.1"
+      "ref": "v3.1.0"
     "stdlib":
       "repo": "https://github.com/puppetlabs/puppetlabs-stdlib.git"
-      "ref": "4.4.0"
+      "ref": "4.17.0"
   symlinks:
     "rightscale": "#{source_dir}"

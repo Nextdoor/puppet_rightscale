@@ -57,18 +57,25 @@ describe AutoSigner do
   end
 
   ###############################
-  # find_preshared_key() tests #
+  # find_attribute() tests #
   ###############################
-  it "find_preshared_key() should work" do
-    expect { @auto.find_preshared_key(@bad_csr.attributes[1])}.to raise_error(/Invalid/)
-    @auto.find_preshared_key(@good_csr.attributes[1]).should == 'key'
+  it "find_attribute() should work" do
+    @auto.find_attribute(
+            'pp_preshared_key',
+            @bad_csr.attributes).should == nil
+    @auto.find_attribute(
+            'challengePassword',
+            @good_csr.attributes).should == 'password'
+    @auto.find_attribute(
+            'pp_preshared_key',
+            @good_csr.attributes).should == 'key'
   end
 
   ########################
   # validate_csr() tests #
   ########################
   it "validate_csr() should work" do
-    expect { @auto.validate_csr(@bad_csr) }.to raise_error(/missing/)
+    expect { @auto.validate_csr(@bad_csr) }.to raise_error(/invalid/)
     expected_response = ["password", "key"]
     @auto.validate_csr(@good_csr).should == expected_response
   end
