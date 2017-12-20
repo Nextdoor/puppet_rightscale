@@ -62,18 +62,18 @@ class Hiera
         debug("Hiera Backend Initialized")
       end
 
-      # Accessor method for the [:rightscale][:tag_prefix] config option
+      # Accessor method for the [:rs_tag][:tag_prefix] config option
       # so that its easier to mock in the unit tests. See the spec file
       # for details on WHY this is necessary.
       def prefix
-        Config[:rightscale][:tag_prefix]
+        Config[:rs_tag][:tag_prefix]
       end
 
-      # Accessor method for the [:rightscale][:cache_timeout] config option
+      # Accessor method for the [:rs_tag][:cache_timeout] config option
       # so that its easier to mock in the unit tests. See the spec file
       # for details on WHY this is necessary.
       def cache_timeout
-        Config[:rightscale][:cache_timeout]
+        Config[:rs_tag][:cache_timeout]
       end
 
       # Quick logger method that writes out a common logging line with the

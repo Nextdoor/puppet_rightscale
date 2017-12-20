@@ -131,7 +131,9 @@ class AutoSigner
     # why here the OID doesn't work, but seraching for the term
     # 'pp_preshared_key' does. This is some ruby black magic I don't
     # understand.
-    pp_preshared_key = find_attribute('pp_preshared_key', csr.attributes)
+    pp_preshared_key = 
+      find_attribute(PP_PRESHARED_KEY_OID, csr.attributes) ||
+      find_attribute('pp_preshared_key', csr.attributes)
 
     @log.debug("CSR Supplied challenge_password: #{challenge_password}")
     @log.debug("CSR Supplied pp_preshared_key: #{pp_preshared_key}")
